@@ -1,0 +1,38 @@
+.trips-div {
+  width: 100%;
+  height: 50em;
+  overflow-y: auto;
+  position: relative;
+}
+
+.trips-table {
+  width: 100%;
+  height: 100%;
+}
+
+
+
+.demo-table {
+  width: 100%;
+}
+
+.icon-img{
+  height: 2em;
+  width: 3em;
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+

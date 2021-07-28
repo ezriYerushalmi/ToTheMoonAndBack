@@ -1,0 +1,46 @@
+<div class=" trips-div">
+<table mat-table  [dataSource]="trips" class="trips-table" >
+
+  <ng-container matColumnDef="stateName">
+    <th mat-header-cell *matHeaderCellDef>State</th>
+    <td mat-cell *matCellDef="let element">{{element.stateDetails.name}}</td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="fromDate">
+    <th mat-header-cell *matHeaderCellDef>From Date</th>
+    <td mat-cell *matCellDef="let element">{{element.fromDate | date: 'dd-MM-yyyy'}}</td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="toDate">
+    <th mat-header-cell *matHeaderCellDef>To Date</th>
+    <td mat-cell *matCellDef="let element">
+      {{element.toDate | date:  'dd-MM-yyyy'}}
+    </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="note">
+    <th mat-header-cell *matHeaderCellDef>Notes</th>
+    <td mat-cell *matCellDef="let element">
+      {{element.note }}
+    </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="flag">
+    <th mat-header-cell *matHeaderCellDef>Flag</th>
+    <td mat-cell *matCellDef="let element">
+      <img class="icon-img" [src]="element.stateDetails.flag" [alt]="element.stateDetails.name">
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+  <tr
+    mat-row
+    (click)="clickedRows.add(row)"
+    *matRowDef="let row; columns: displayedColumns;"
+  ></tr>
+</table>
+</div>
