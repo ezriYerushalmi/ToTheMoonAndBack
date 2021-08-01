@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {TripData} from "../Interfaces/trip-data.interface";
 import {BehaviorSubject} from "rxjs";
+import {State} from "../Interfaces/state.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -8,22 +9,29 @@ import {BehaviorSubject} from "rxjs";
 export class ManagerService {
   trips: TripData[] =[];
   tripsNotifier;
+  changeMapView;
 
   constructor() {
     this.tripsNotifier = new BehaviorSubject<TripData[]|undefined>(undefined);
-    setTimeout(() => {
+    this.changeMapView = new BehaviorSubject<State|undefined>(undefined);
+  /*  setTimeout(() => {
       this.addNewTripsMock();
-    }, 1000)
+    }, 1000)*/
   }
 
   notifyTripsChange() {
     this.tripsNotifier.next(this.trips);
   }
 
+  changeStateMapView(state: State) {
+    this.changeMapView.next(state);
+  }
+
 
   addNewTrip(newTrip: TripData){
     this.trips.push(newTrip);
     this.notifyTripsChange();
+    this.changeStateMapView(newTrip.stateDetails)
   }
 
   removeTrip(){
@@ -35,7 +43,7 @@ export class ManagerService {
   }
 
   addNewTripsMock(){
-    for (let i = 0; i < 10; i ++){
+    for (let i = 0; i < 3; i ++){
       const newTrip = {
         stateDetails:  {
           "name": "Israel",
@@ -113,11 +121,15 @@ export class ManagerService {
         },
         fromDate: new Date(),
         toDate: new Date(),
-        note: 'Wow'
+        note: 'Wow djlkaj lkdjalkdj lkjdflkaj dlkajld jkldasj kldfjlksdl vlksdfllldf '
       }
       this.trips.push(newTrip);
     }
 
-   this.notifyTripsChange();
+  this.notifyTripsChange();
+  }
+
+  selectState(state: State) {
+
   }
 }

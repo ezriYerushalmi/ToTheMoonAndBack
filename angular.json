@@ -36,10 +36,12 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/cesium/Build/Cesium/Widgets/widgets.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": [
+              "./node_modules/cesium/Build/Cesium/Cesium.js"
             ]
           },
           "configurations": {
@@ -47,8 +49,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "4.5mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",

@@ -24,6 +24,7 @@ import { DatePipe } from '@angular/common';
 /** Materials **/
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from "./material-module";
+import {MatTableModule} from '@angular/material/table';
 import { MapComponent } from './Component/map/map.component';
 
 
@@ -40,9 +41,10 @@ import { MapComponent } from './Component/map/map.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
     MaterialModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [

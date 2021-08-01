@@ -69,7 +69,7 @@ export class TripsTableComponent implements OnInit, OnDestroy {
       if(!trips) {
         trips = [];
       }
-      this.trips = trips;
+      this.trips = [...trips];
     })
   }
 
