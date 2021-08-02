@@ -4,7 +4,9 @@
     <input matInput
            aria-label="State"
            [matAutocomplete]="auto"
-           [formControl]="stateCtrl">
+           [formControl]="stateCtrl"
+           (blur)="onBlur()" (input)="onInputChange()" #input
+    >
     <mat-autocomplete  #auto="matAutocomplete"  (optionSelected)="stateOptionSelected($event)">
       <mat-option *ngFor="let state of filteredStates | async" [value]="state.name"   >
         <img class="example-option-img" aria-hidden [src]="state.flag" height="25">

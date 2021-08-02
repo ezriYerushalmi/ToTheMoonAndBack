@@ -1,5 +1,5 @@
-import {Component, Input, OnInit,EventEmitter, Output} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {Component, Input, OnInit, EventEmitter, Output, ViewChild, ElementRef, Renderer2} from '@angular/core';
+import {FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {ApiServicesService} from "../../Services/api-services.service";
@@ -10,7 +10,10 @@ import {State} from "../../Interfaces/state.interface";
 @Component({
   selector: 'app-search-states',
   templateUrl: './search-states.component.html',
-  styleUrls: ['./search-states.component.scss']
+  styleUrls: ['./search-states.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR, useExisting: SearchStatesComponent, multi: true
+  }]
 })
 export class SearchStatesComponent implements OnInit {
   stateCtrl = new FormControl();
@@ -20,7 +23,12 @@ export class SearchStatesComponent implements OnInit {
   @Output() selectedState = new EventEmitter();
 
 
-  constructor(private apiService: ApiServicesService) {
+  onTouched = () => {};
+  onChange = (_: string) => {};
+
+  @ViewChild('input', {static: true, read: ElementRef}) inputElementRef!: ElementRef;
+
+  constructor(private apiService: ApiServicesService, private _renderer: Renderer2) {
 
     this.filteredStates = this.stateCtrl.valueChanges
       .pipe(
@@ -30,6 +38,37 @@ export class SearchStatesComponent implements OnInit {
     this.stateCtrl.valueChanges.subscribe((value) => {
       this.inputValueChange.emit({inputValue: value});
     });
+  }
+
+
+  clearInput() {
+    this._renderer.setProperty(this.inputElementRef.nativeElement, 'value', '');
+    this.onChange('');
+  }
+
+  onInputChange() {
+    const value = this.inputElementRef.nativeElement.value;
+    this.onChange(value);
+  }
+
+  onBlur() {
+    this.onTouched();
+  }
+
+  registerOnTouched(fn: any) {
+    this.onTouched = fn;
+  }
+
+  registerOnChange(fn: any) {
+    this.onChange = fn;
+  }
+
+  writeValue(value: string) {
+    this._renderer.setProperty(this.inputElementRef.nativeElement, 'value', value);
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this._renderer.setProperty(this.inputElementRef.nativeElement, 'disabled', isDisabled);
   }
 
   private _filterStates(value: string): State[] {

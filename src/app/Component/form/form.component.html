@@ -9,7 +9,7 @@
       <mat-card-content>
 
 
-        <app-search-states  (selectedState)="stateOptionSelected($event)" ></app-search-states>
+        <app-search-states [formControlName]="'state'"  (selectedState)="stateOptionSelected($event)" ></app-search-states>
 
         <mat-form-field  class="example-full-width">
           <mat-label>Enter a date range</mat-label>

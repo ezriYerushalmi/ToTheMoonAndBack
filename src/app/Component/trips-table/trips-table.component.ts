@@ -4,52 +4,6 @@ import {TripData} from "../../Interfaces/trip-data.interface";
 import {ManagerService} from "../../Services/manager.service";
 
 
-/*const ELEMENT_DATA: TripData[] = [
-  {
-    stateName: 'ישראל',
-    fromDate: new Date(),
-    toDate: new Date(),
-    stateDetails: {flag: "https://restcountries.eu/data/afg.svg", name: "Afghanistan"}
-  },
-  {
-    stateName: 'ישראל',
-    fromDate: new Date(),
-    toDate: new Date(),
-    stateDetails: {flag: "https://restcountries.eu/data/afg.svg", name: "Afghanistan"}
-  },
-  {
-    stateName: 'ישראל',
-    fromDate: new Date(),
-    toDate: new Date(),
-    stateDetails: {flag: "https://restcountries.eu/data/afg.svg", name: "Afghanistan"}
-  },
-  {
-    stateName: 'ישראל',
-    fromDate: new Date(),
-    toDate: new Date(),
-    stateDetails: {flag: "https://restcountries.eu/data/afg.svg", name: "Afghanistan"}
-  },
-  {
-    stateName: 'ישראל',
-    fromDate: new Date(),
-    toDate: new Date(),
-    stateDetails: {flag: "https://restcountries.eu/data/afg.svg", name: "Afghanistan"}
-  },
-  {
-    stateName: 'ישראל',
-    fromDate: new Date(),
-    toDate: new Date(),
-    stateDetails: {flag: "https://restcountries.eu/data/afg.svg", name: "Afghanistan"}
-  },
-  {
-    stateName: 'ישראל',
-    fromDate: new Date(),
-    toDate: new Date(),
-    stateDetails: {flag: "https://restcountries.eu/data/afg.svg", name: "Afghanistan"}
-  },
-
-];*/
-
 
 @Component({
   selector: 'app-trips-table',
@@ -57,6 +11,8 @@ import {ManagerService} from "../../Services/manager.service";
   styleUrls: ['./trips-table.component.scss']
 })
 export class TripsTableComponent implements OnInit, OnDestroy {
+
+  selectedRow = -1;
 
   displayedColumns: string[] = ['stateName', 'fromDate', 'toDate','note' ,'flag'];
   trips: TripData[] = [];
@@ -75,6 +31,10 @@ export class TripsTableComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.tripSubscriber?.unsubscribe();
+  }
+
+  pickARow(row: TripData) {
+    this.managerService.changeStateMapView(row.stateDetails);
   }
 
 }
